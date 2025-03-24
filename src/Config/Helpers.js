@@ -10,7 +10,10 @@ class Helpers {
   static ASSETS_IMAGES_PATH = "/assets/img";
   static DASHBOARD_IMAGES_PATH = "/dashboard/images";
 
-  static authUser = JSON.parse(localStorage.getItem("user")) ?? {};
+  // static authUser = JSON.parse(localStorage.getItem("user")) ?? {};
+  static getAuthUser() {
+    return JSON.parse(localStorage.getItem("user")) || {};
+  }
   static serverFile = (name) => {
     return `${this.basePath}/${name}`;
   };
@@ -42,6 +45,7 @@ class Helpers {
       },
     };
   }
+
 
   static getAuthFileHeaders() {
     return {
@@ -88,64 +92,64 @@ class Helpers {
     });
   };
 
-  static toggleCSS() {
-    const path = window.location.pathname;
+  // static toggleCSS() {
+  //   const path = window.location.pathname;
 
-    const mainCSS = document.getElementsByClassName("main-theme");
-    const dashboardCSS = document.getElementsByClassName("dashboard-theme");
+  //   const mainCSS = document.getElementsByClassName("main-theme");
+  //   const dashboardCSS = document.getElementsByClassName("dashboard-theme");
 
-    // Preload stylesheets to avoid FOUC
-    const preloadStyles = (styles) => {
-      styles.forEach((style) => {
-        const link = document.createElement("link");
-        link.rel = "preload";
-        link.href = style.href;
-        link.as = "style";
-        document.head.appendChild(link);
-      });
-    };
+  //   // Preload stylesheets to avoid FOUC
+  //   const preloadStyles = (styles) => {
+  //     styles.forEach((style) => {
+  //       const link = document.createElement("link");
+  //       link.rel = "preload";
+  //       link.href = style.href;
+  //       link.as = "style";
+  //       document.head.appendChild(link);
+  //     });
+  //   };
 
-    if (path.includes("/user") || path.includes("/admin")) {
-      preloadStyles(Array.from(dashboardCSS));
-      // Disable main theme and enable dashboard theme
-      setTimeout(() => {
-        for (let i = 0; i < mainCSS.length; i++) {
-          mainCSS[i].setAttribute("disabled", "true");
-        }
-        for (let i = 0; i < dashboardCSS.length; i++) {
-          dashboardCSS[i].removeAttribute("disabled");
-        }
-      }, 0);
-    } else {
-      preloadStyles(Array.from(mainCSS));
-      // Enable main theme and disable dashboard theme
-      setTimeout(() => {
-        for (let i = 0; i < mainCSS.length; i++) {
-          mainCSS[i].removeAttribute("disabled");
-        }
-        for (let i = 0; i < dashboardCSS.length; i++) {
-          dashboardCSS[i].setAttribute("disabled", "true");
-        }
-      }, 0);
-    }
-  }
+  //   if (path.includes("/user") || path.includes("/admin")) {
+  //     preloadStyles(Array.from(dashboardCSS));
+  //     // Disable main theme and enable dashboard theme
+  //     setTimeout(() => {
+  //       for (let i = 0; i < mainCSS.length; i++) {
+  //         mainCSS[i].setAttribute("disabled", "true");
+  //       }
+  //       for (let i = 0; i < dashboardCSS.length; i++) {
+  //         dashboardCSS[i].removeAttribute("disabled");
+  //       }
+  //     }, 0);
+  //   } else {
+  //     preloadStyles(Array.from(mainCSS));
+  //     // Enable main theme and disable dashboard theme
+  //     setTimeout(() => {
+  //       for (let i = 0; i < mainCSS.length; i++) {
+  //         mainCSS[i].removeAttribute("disabled");
+  //       }
+  //       for (let i = 0; i < dashboardCSS.length; i++) {
+  //         dashboardCSS[i].setAttribute("disabled", "true");
+  //       }
+  //     }, 0);
+  //   }
+  // }
 
-  static loadScript(scriptName, dashboard = false) {
-    return new Promise((resolve, reject) => {
-      const scriptPath = `/${
-        dashboard ? "dashboard" : "assets"
-      }/js/${scriptName}`;
-      const script = document.createElement("script");
-      script.src = scriptPath;
-      script.async = true;
+  // static loadScript(scriptName, dashboard = false) {
+  //   return new Promise((resolve, reject) => {
+  //     const scriptPath = `/${
+  //       dashboard ? "dashboard" : "assets"
+  //     }/js/${scriptName}`;
+  //     const script = document.createElement("script");
+  //     script.src = scriptPath;
+  //     script.async = true;
 
-      script.onload = () => resolve(script); // Resolve the promise once the script is loaded
-      script.onerror = () =>
-        reject(new Error(`Script load error: ${scriptPath}`));
+  //     script.onload = () => resolve(script); // Resolve the promise once the script is loaded
+  //     script.onerror = () =>
+  //       reject(new Error(`Script load error: ${scriptPath}`));
 
-      document.body.appendChild(script);
-    });
-  }
+  //     document.body.appendChild(script);
+  //   });
+  // }
 }
 
 export default Helpers;

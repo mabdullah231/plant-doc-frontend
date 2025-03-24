@@ -1,73 +1,40 @@
-import { useEffect, useState } from "react";
-import Helpers from "../Config/Helpers.js";
-import { Outlet, useLocation } from "react-router-dom";
-// import { Header, Footer } from "../components";
-// import Loader from "../components/Common/Loader.jsx";
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-  const location = useLocation();
-  const [loader, setLoader] = useState(true);
-
-//   useEffect(() => {
-//     Helpers.toggleCSS();
-//     Helpers.scrollToTop();
-//   }, [location.pathname]);
-
-//   useEffect(() => {
-//     Helpers.loadScript("modernizr-3.5.0.min.js")
-//       .then(() => Helpers.loadScript("jquery-1.12.4.min.js"))
-//       .then(() => Helpers.loadScript("popper.min.js"))
-//       .then(() => Helpers.loadScript("bootstrap.min.js"))
-//       .then(() => Helpers.loadScript("owl.carousel.min.js"))
-//       .then(() => Helpers.loadScript("isotope.pkgd.min.js"))
-//       .then(() => Helpers.loadScript("ajax-form.js"))
-//       .then(() => Helpers.loadScript("waypoints.min.js"))
-//       .then(() => Helpers.loadScript("jquery.counterup.min.js"))
-//       .then(() => Helpers.loadScript("imagesloaded.pkgd.min.js"))
-//       .then(() => Helpers.loadScript("scrollIt.js"))
-//       .then(() => Helpers.loadScript("jquery.scrollUp.min.js"))
-//       .then(() => Helpers.loadScript("wow.min.js"))
-//       .then(() => Helpers.loadScript("nice-select.min.js"))
-//       .then(() => Helpers.loadScript("jquery.slicknav.min.js"))
-//       .then(() => Helpers.loadScript("jquery.magnific-popup.min.js"))
-//       .then(() => Helpers.loadScript("plugins.js"))
-//       .then(() => Helpers.loadScript("range.js"))
-//       .then(() => Helpers.loadScript("jquery.ajaxchimp.min.js"))
-//       .then(() => Helpers.loadScript("jquery.form.js"))
-//       .then(() => Helpers.loadScript("jquery.validate.min.js"))
-//       .then(() => Helpers.loadScript("contact.js"))
-//       .then(() => Helpers.loadScript("mail-script.js"))
-//       .then(() => Helpers.loadScript("main.js"))
-//       .then(() => {
-//         if ($("#slider-range").length) {
-//           $("#slider-range").slider({
-//             range: true,
-//             min: 0,
-//             max: 24600,
-//             values: [750, 24600],
-//             slide: function (event, ui) {
-//               $("#amount").val(`$${ui.values[0]} - $${ui.values[1]}/ Year`);
-//             },
-//           });
-//           $("#amount").val(`$${$("#slider-range").slider("values", 0)} - $${$("#slider-range").slider("values", 1)}/ Year`);
-//         }
-//       })
-//       .finally(() => {
-//         setTimeout(() => {
-//           setLoader(false);
-//         }, 500); // Show loader for at least 1 second
-//       });
-//   }, [location]);
-
-//   if (loader) {
-//     return <Loader />;
-//   }
-
   return (
-    <div>
-      {/* <Header /> */}
-      {/* <Outlet /> */}
-      {/* <Footer /> */}
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50">
+      {/* Left Side - Dynamic Content */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+        <Outlet /> {/* This will render the Login, Register, or ForgetPassword component */}
+      </div>
+
+      {/* Right Side - Plant Doc Description */}
+      <div className="w-full md:w-1/2 bg-gray-800 flex items-center justify-center p-8">
+        <div className="text-white max-w-md">
+          <h1 className="text-4xl font-bold mb-4">Plant Doc</h1>
+          <p className="text-lg mb-6">
+            Plant Doc is your ultimate companion for managing and understanding
+            various plant types. Whether you're a botanist, gardener, or plant
+            enthusiast, Plant Doc provides you with the tools and knowledge to
+            care for your plants effectively.
+          </p>
+          <ul className="space-y-2">
+            <li className="flex items-center">
+              <span className="mr-2">🌱</span>
+              <span>Comprehensive plant database</span>
+            </li>
+            <li className="flex items-center">
+              <span className="mr-2">📚</span>
+              <span>Detailed care guides</span>
+            </li>
+            <li className="flex items-center">
+              <span className="mr-2">🔍</span>
+              <span>Advanced search and filtering</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

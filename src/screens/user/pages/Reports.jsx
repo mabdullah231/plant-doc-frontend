@@ -97,7 +97,7 @@ const Reports = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentItems.map((report, index) => (
+                    {currentItems.reverse().map((report, index) => (
                       <tr key={report.id} className="bg-white border-b hover:bg-gray-50 transition-colors">
                         <th scope="row" className="text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                           {indexOfFirstItem + index + 1}

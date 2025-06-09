@@ -35,7 +35,7 @@ const Login = () => {
       Helpers.toast("success", "Login successful.");
       Helpers.setItem("token", response.data.token); // Save token
       Helpers.setItem("user", JSON.stringify(response.data.user)); // Save user data
-
+      Helpers.setItem("loginTimestamp", Date.now());
       // Redirect based on user type
       const userType = response.data.user.user_type;
       if (parseInt(userType) === 0 || parseInt(userType) === 1) {
